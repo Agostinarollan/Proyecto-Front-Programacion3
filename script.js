@@ -53,6 +53,7 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.47
                         <p>Viento Máx:
                         ${clima.daily.wind_gusts_10m_max[i]} km/h</p>
 
+                         
                     </div>
 
                 `;
