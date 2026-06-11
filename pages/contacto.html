@@ -84,32 +84,36 @@
                     
       </section>
 
-      <section id="Form">
-        <form class="row g-3 needs-validation" novalidate>
-          <div class="col-12 col-md-12 position-relative">
-            <label for="validationTooltip01" class="form-label">NOMBRE</label>
-            <input type="text" class="form-control" id="validationTooltip01"  required>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+      <section id="Formulario" class="container my-5">
+        <h2>Solicitá tu cotización</h2>
+
+        <form>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre y apellido</label>
+            <input type="text" class="form-control" id="nombre" required>
           </div>
-          <div class=" col-12 col-md-12 position-relative">
-            <label for="validationTooltip02" class="form-label">APELLIDO</label>
-            <input type="text" class="form-control" id="validationTooltip02" required>
-            <div class="valid-tooltip">
-              Looks good!
-            </div>
+
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" class="form-control" id="telefono" required>
           </div>
-          <div class="col-12 col-md-12 position-relative">
-            <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">EMAIL</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            
-          
+
+          <div class="mb-3">
+            <label for="producto" class="form-label">Producto de interés</label>
+            <select class="form-select" id="producto" required>
+              <option value="">Seleccionar producto</option>
+              <option>Raigrás anual LE284</option>
+              <option>Alfalfa</option>
+              <option>Luminosa</option>
+            </select>
           </div>
-          <div class="col-12">
-            <button class="btn btn-primary" type="submit">ENVIAR</button>
+
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Consulta</label>
+            <textarea class="form-control" id="mensaje" rows="4"></textarea>
           </div>
+
+          <button type="submit" class="btn btn-success">Enviar consulta</button>
         </form>
       </section>
     </main>

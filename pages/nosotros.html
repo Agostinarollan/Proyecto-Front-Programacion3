@@ -75,7 +75,10 @@
       </div>
     </nav>
     <main>
-      <section></section>
+      <section id="SeccionGrafico" class="container my-5">
+        <h2 class="text-center mb-4">Temperatura máxima semanal</h2>
+        <div id="graficoClima"></div>
+      </section>
 
       <section></section>
     </main>
@@ -119,7 +122,63 @@
       </div>
       
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script>
+            const urlClima = "https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.4796&daily=temperature_2m_max&timezone=America/Argentina/Cordoba";
 
+        fetch(urlClima)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            const fechas = data.daily.time;
+            const temperaturas = data.daily.temperature_2m_max;
+
+            const dias = fechas.map(function(fecha) {
+            const fechaObj = new Date(fecha + "T00:00:00");
+
+            return fechaObj.toLocaleDateString("es-AR", {
+                weekday: "short",
+                day: "numeric"
+            });
+            });
+
+            const grafico = echarts.init(document.getElementById("graficoClima"));
+
+            const opciones = {
+            tooltip: {
+                trigger: "axis"
+            },
+            xAxis: {
+                type: "category",
+                data: dias
+            },
+            yAxis: {
+                type: "value",
+                name: "°C"
+            },
+            series: [
+                {
+                name: "Temperatura máxima",
+                type: "line",
+                data: temperaturas,
+                smooth: true
+                }
+            ]
+            };
+
+            grafico.setOption(opciones);
+
+            window.addEventListener("resize", function() {
+            grafico.resize();
+            });
+        })
+      .catch(function(error) {
+        console.error("Error al cargar el gráfico:", error);
+      });
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
