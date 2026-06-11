@@ -26,14 +26,33 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.47
 
             for (let i = 0; i < clima.daily.time.length; i++) {
 
+                    const buscadorClima = document.getElementById("buscadorClima");
+
+                    if (buscadorClima) {
+                    buscadorClima.addEventListener("keyup", function () {
+                        const texto = buscadorClima.value.toLowerCase();
+                        const tarjetas = document.querySelectorAll(".card-clima-ext");
+
+                        tarjetas.forEach(function (tarjeta) {
+                        const fecha = tarjeta.dataset.dia;
+
+                        if (fecha.includes(texto)) {
+                            tarjeta.closest(".card-clima-item").style.display = "block";
+                        } else {
+                            tarjeta.closest(".card-clima-item").style.display = "none";
+                        }
+                        });
+                    });
+                    
+            }
             contenedor.innerHTML += `
                 <div class="col-12 col-md-6 col-lg-3">
-                    <div class="card-clima-ext">
-                    <h3>${clima.daily.time[i]}</h3>
-                    <p><strong>Máx:</strong> ${clima.daily.temperature_2m_max[i]} °C</p>
-                    <p><strong>Mín:</strong> ${clima.daily.temperature_2m_min[i]} °C</p>
-                    <p><strong>Lluvia:</strong> ${clima.daily.precipitation_probability_max[i]}%</p>
-                    <p><strong>Viento:</strong> ${clima.daily.wind_gusts_10m_max[i]} km/h</p>
+                    <div class="card-clima-ext" data-dia="${clima.daily.time[i].toLowerCase()}">
+                        <h3>${clima.daily.time[i]}</h3>
+                        <p><strong>Máx:</strong> ${clima.daily.temperature_2m_max[i]} °C</p>
+                        <p><strong>Mín:</strong> ${clima.daily.temperature_2m_min[i]} °C</p>
+                        <p><strong>Lluvia:</strong> ${clima.daily.precipitation_probability_max[i]}%</p>
+                        <p><strong>Viento:</strong> ${clima.daily.wind_gusts_10m_max[i]} km/h</p>
                     </div>
                 </div>
                 `;
@@ -41,48 +60,61 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.47
 
         });
 
-        const formulario = document.querySelector("#Formulario form");
+       const formulario = document.getElementById("formContacto");
 
-        formulario.addEventListener("submit", function(e){
-            e.preventDefault();
+if (formulario) {
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-            const nombre = document.querySelector("#nombre").value;
-            const telefono = document.querySelector("#telefono").value;
-            const producto = document.querySelector("#producto").value;
+        const nombre = document.getElementById("nombre").value.trim();
+        const apellido = document.getElementById("apellido").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+        const producto = document.getElementById("producto").value;
+        const cantidad = document.getElementById("cantidad").value;
+        const localidad = document.getElementById("localidad").value.trim();
+        const mensaje = document.getElementById("mensaje").value.trim();
+        const error = document.getElementById("errorFormulario");
 
-            if(nombre === "" || telefono === "" || producto === ""){
-                alert("Por favor completá los campos obligatorios.");
-                return;
-            }
+        error.textContent = "";
+        error.style.color = "red";
 
-            alert("Consulta enviada correctamente.");
-            formulario.reset();
-        });
+        if (
+        nombre === "" ||
+        apellido === "" ||
+        email === "" ||
+        telefono === "" ||
+        producto === "" ||
+        cantidad === "" ||
+        localidad === "" ||
+        mensaje === ""
+        ) {
+        error.textContent = "Por favor, completá todos los campos.";
+        return;
+        }
 
+        if (!email.includes("@") || !email.includes(".")) {
+        error.textContent = "Ingresá un email válido.";
+        return;
+        }
 
-  console.log("grafico.js cargado");
+        if (telefono.length < 8) {
+        error.textContent = "Ingresá un teléfono válido.";
+        return;
+        }
 
-const contenedor = document.getElementById("graficoClima");
+        if (cantidad <= 0) {
+        error.textContent = "La cantidad debe ser mayor a 0.";
+        return;
+        }
 
-console.log(contenedor);
-console.log(echarts);
+        error.style.color = "green";
+        error.textContent = "Formulario enviado correctamente.";
 
-const grafico = echarts.init(contenedor);
-
-const opciones = {
-  xAxis: {
-    type: "category",
-    data: ["Lun", "Mar", "Mié", "Jue", "Vie"]
-  },
-  yAxis: {
-    type: "value"
-  },
-  series: [
-    {
-      data: [18, 22, 25, 21, 19],
-      type: "line"
+        formulario.reset();
+    });
     }
-  ]
-};
+        
 
-grafico.setOption(opciones);
+
+  

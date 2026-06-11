@@ -83,39 +83,30 @@
         </picture>
                     
       </section>
-
-      <section id="Formulario" class="container my-5">
-        <h2>Solicitá tu cotización</h2>
-
-        <form>
-          <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre y apellido</label>
-            <input type="text" class="form-control" id="nombre" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="tel" class="form-control" id="telefono" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="producto" class="form-label">Producto de interés</label>
-            <select class="form-select" id="producto" required>
-              <option value="">Seleccionar producto</option>
-              <option>Raigrás anual LE284</option>
-              <option>Alfalfa</option>
-              <option>Luminosa</option>
+      <section id="Formulario">
+          <form id="formContacto">
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="text" id="apellido" placeholder="Apellido">
+            <input type="email" id="email" placeholder="Email">
+            <input type="tel" id="telefono" placeholder="Teléfono">
+            
+            <select id="producto">
+              <option value="">Seleccioná un producto</option>
+              <option value="gramineas">Gramíneas</option>
+              <option value="leguminosas">Leguminosas</option>
+              <option value="pasturas">Pasturas</option>
             </select>
-          </div>
 
-          <div class="mb-3">
-            <label for="mensaje" class="form-label">Consulta</label>
-            <textarea class="form-control" id="mensaje" rows="4"></textarea>
-          </div>
+            <input type="number" id="cantidad" placeholder="Cantidad estimada">
+            <input type="text" id="localidad" placeholder="Localidad">
+            <textarea id="mensaje" placeholder="Mensaje o consulta"></textarea>
 
-          <button type="submit" class="btn btn-success">Enviar consulta</button>
-        </form>
+            <p id="errorFormulario"></p>
+
+            <button type="submit">Enviar consulta</button>
+          </form>
       </section>
+      
     </main>
 
     <footer>

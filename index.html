@@ -240,8 +240,8 @@
         </iframe>
       </section>
 
-      <section class="Clima-hoy">
-        <div class="card-clima">
+      <section class="clima-hoy  container my-5">
+        <div class="card-clima-actual">
         <h2>Clima Actual</h2>
         <p>🌡 Temperatura: <span id="temp"></span></p>
         <p>💧 Humedad: <span id="humedad"></span></p>
@@ -252,6 +252,14 @@
 
       <section id="Clima-ext" class="container my-5">
         <h2>Clima extendido</h2>
+
+        <div class="buscador-clima">
+          <input
+            type="text"
+            id="buscadorClima"
+            placeholder="Buscar por fecha..."
+          >
+        </div>
 
         <div id="card-clima-extendido" class="row g-4"></div>
       </section>
