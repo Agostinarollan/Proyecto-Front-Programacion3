@@ -25,94 +25,94 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.47
             const contenedor = document.getElementById("card-clima-extendido");
 
             for (let i = 0; i < clima.daily.time.length; i++) {
-
-                    const buscadorClima = document.getElementById("buscadorClima");
-
-                    if (buscadorClima) {
-                    buscadorClima.addEventListener("keyup", function () {
-                        const texto = buscadorClima.value.toLowerCase();
-                        const tarjetas = document.querySelectorAll(".card-clima-ext");
-
-                        tarjetas.forEach(function (tarjeta) {
-                        const fecha = tarjeta.dataset.dia;
-
-                        if (fecha.includes(texto)) {
-                            tarjeta.closest(".card-clima-item").style.display = "block";
-                        } else {
-                            tarjeta.closest(".card-clima-item").style.display = "none";
-                        }
-                        });
-                    });
-                    
-            }
-            contenedor.innerHTML += `
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="card-clima-ext" data-dia="${clima.daily.time[i].toLowerCase()}">
-                        <h3>${clima.daily.time[i]}</h3>
-                        <p><strong>Máx:</strong> ${clima.daily.temperature_2m_max[i]} °C</p>
-                        <p><strong>Mín:</strong> ${clima.daily.temperature_2m_min[i]} °C</p>
-                        <p><strong>Lluvia:</strong> ${clima.daily.precipitation_probability_max[i]}%</p>
-                        <p><strong>Viento:</strong> ${clima.daily.wind_gusts_10m_max[i]} km/h</p>
-                    </div>
+                 contenedor.innerHTML += `
+                <div class="col-12 col-md-6 col-lg-3 card-clima-item">
+                <div class="card-clima-ext" data-dia="${clima.daily.time[i].toLowerCase()}">
+                    <h3>${clima.daily.time[i]}</h3>
+                    <p><strong>Máx:</strong> ${clima.daily.temperature_2m_max[i]} °C</p>
+                    <p><strong>Mín:</strong> ${clima.daily.temperature_2m_min[i]} °C</p>
+                    <p><strong>Lluvia:</strong> ${clima.daily.precipitation_probability_max[i]}%</p>
+                    <p><strong>Viento:</strong> ${clima.daily.wind_gusts_10m_max[i]} km/h</p>
                 </div>
-                `;
+                </div>
+            `;
+            }
+
+            const buscadorClima = document.getElementById("buscadorClima");
+
+            if (buscadorClima) {
+                buscadorClima.addEventListener("input", function () {
+                    const texto = buscadorClima.value.toLowerCase().trim();
+
+                    const tarjetas = document.querySelectorAll(".card-clima-ext");
+
+                    tarjetas.forEach(function (tarjeta) {
+                    const fecha = tarjeta.dataset.dia;
+
+                    if (fecha.includes(texto)) {
+                        tarjeta.closest(".card-clima-item").style.display = "";
+                    } else {
+                        tarjeta.closest(".card-clima-item").style.display = "none";
+                    }
+                    });
+                });
             }
 
         });
 
        const formulario = document.getElementById("formContacto");
 
-if (formulario) {
-  formulario.addEventListener("submit", function (e) {
-    e.preventDefault();
+    if (formulario) {
+        formulario.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-        const nombre = document.getElementById("nombre").value.trim();
-        const apellido = document.getElementById("apellido").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const telefono = document.getElementById("telefono").value.trim();
-        const producto = document.getElementById("producto").value;
-        const cantidad = document.getElementById("cantidad").value;
-        const localidad = document.getElementById("localidad").value.trim();
-        const mensaje = document.getElementById("mensaje").value.trim();
-        const error = document.getElementById("errorFormulario");
+                const nombre = document.getElementById("nombre").value.trim();
+                const apellido = document.getElementById("apellido").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const telefono = document.getElementById("telefono").value.trim();
+                const producto = document.getElementById("producto").value;
+                const cantidad = document.getElementById("cantidad").value;
+                const localidad = document.getElementById("localidad").value.trim();
+                const mensaje = document.getElementById("mensaje").value.trim();
+                const error = document.getElementById("errorFormulario");
 
-        error.textContent = "";
-        error.style.color = "red";
+                error.textContent = "";
+                error.style.color = "red";
 
-        if (
-        nombre === "" ||
-        apellido === "" ||
-        email === "" ||
-        telefono === "" ||
-        producto === "" ||
-        cantidad === "" ||
-        localidad === "" ||
-        mensaje === ""
-        ) {
-        error.textContent = "Por favor, completá todos los campos.";
-        return;
-        }
+                if (
+                nombre === "" ||
+                apellido === "" ||
+                email === "" ||
+                telefono === "" ||
+                producto === "" ||
+                cantidad === "" ||
+                localidad === "" ||
+                mensaje === ""
+                ) {
+                error.textContent = "Por favor, completá todos los campos.";
+                return;
+                }
 
-        if (!email.includes("@") || !email.includes(".")) {
-        error.textContent = "Ingresá un email válido.";
-        return;
-        }
+                if (!email.includes("@") || !email.includes(".")) {
+                error.textContent = "Ingresá un email válido.";
+                return;
+                }
 
-        if (telefono.length < 8) {
-        error.textContent = "Ingresá un teléfono válido.";
-        return;
-        }
+                if (telefono.length < 8) {
+                error.textContent = "Ingresá un teléfono válido.";
+                return;
+                }
 
-        if (cantidad <= 0) {
-        error.textContent = "La cantidad debe ser mayor a 0.";
-        return;
-        }
+                if (cantidad <= 0) {
+                error.textContent = "La cantidad debe ser mayor a 0.";
+                return;
+                }
 
-        error.style.color = "green";
-        error.textContent = "Formulario enviado correctamente.";
+                error.style.color = "green";
+                error.textContent = "Formulario enviado correctamente.";
 
-        formulario.reset();
-    });
+                formulario.reset();
+        });
     }
         
 
