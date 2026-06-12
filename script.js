@@ -115,6 +115,7 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.47
         });
     }
         
+    
 
 
   
