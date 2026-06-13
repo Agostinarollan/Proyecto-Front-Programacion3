@@ -19,9 +19,6 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.47
     fetch("https://api.open-meteo.com/v1/forecast?latitude=-31.2526&longitude=-61.4796&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max,wind_gusts_10m_max&timezone=auto")
         .then(response => response.json())
         .then(clima => {
-
-            console.log(clima);
-
             const contenedor = document.getElementById("card-clima-extendido");
 
             for (let i = 0; i < clima.daily.time.length; i++) {
