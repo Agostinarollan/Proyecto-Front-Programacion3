@@ -470,6 +470,6 @@ input{
     border:1px solid #ccc;
     border-radius:8px;
 }
-    .row-footer{
-        color: #ccc;
-    }
+#footer p{
+    color:#F27507;
+}
